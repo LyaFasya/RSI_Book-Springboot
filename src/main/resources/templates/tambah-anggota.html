@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Anggota</title>
+</head>
+<body>
+
+<h1>Tambah Anggota</h1>
+
+<form th:action="@{/anggota}" method="post">
+    <p>
+        <label for="idAnggota">ID Anggota</label><br>
+        <input id="idAnggota"
+               name="idAnggota"
+               maxlength="10"
+               required>
+    </p>
+
+    <p>
+        <label for="nama">Nama</label><br>
+        <input id="nama"
+               name="nama"
+               maxlength="100"
+               required>
+    </p>
+
+    <p>
+        <label for="alamat">Alamat</label><br>
+        <input id="alamat"
+               name="alamat"
+               maxlength="255"
+               required>
+    </p>
+
+    <button type="submit">Simpan</button>
+    <a th:href="@{/anggota}">Batal</a>
+</form>
+
+</body>
+</html>
