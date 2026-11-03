@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity 
 @Table(name = "anggota")
@@ -17,6 +20,12 @@ public class Anggota {
 
     @Column(name = "alamat", length = 255, nullable = false)
     private String alamat;
+
+    @Column(name = "batas_pinjam", nullable = false)
+    private int batasPinjam = 2;
+
+    @OneToMany(mappedBy = "anggota")
+    private List<TransaksiPinjam> daftarPinjam = new ArrayList<>();
 
     protected Anggota() {
     }
@@ -37,5 +46,20 @@ public class Anggota {
 
     public String getAlamat() {
         return alamat;
+    }
+
+    public int getBatasPinjam() {
+    return batasPinjam;
+}
+
+    public boolean cekBatasPinjam() {
+        long sedangDipinjam = daftarPinjam.stream()
+                .filter(TransaksiPinjam::isDipinjam)
+                .count();
+
+        return sedangDipinjam < batasPinjam;
+    }
+    void catatPinjaman(TransaksiPinjam transaksi) {
+        daftarPinjam.add(transaksi);
     }
 }

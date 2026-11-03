@@ -31,4 +31,13 @@ public class Buku {
     public String getIdBuku() { return idBuku; }
     public String getJudul()  { return judul; }
     public int getStok()      { return stok; }
+    public boolean cekStok()  { return stok > 0;}
+
+    public void kurangiStok() {
+        if (stok <= 0) {
+            throw new IllegalStateException("Stok sudah habis");
+        }
+
+        stok--;
+    }
 }
